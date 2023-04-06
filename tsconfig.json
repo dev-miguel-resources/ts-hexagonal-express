@@ -1,18 +1,18 @@
 {
   "compilerOptions": {
-    "module": "CommonJS", /* me permite que cuando procese mi código de ts luego de compilación/transpilación se pase a JS */
-    "esModuleInterop": true, /* me permite tener compatibilidad con otras extensiones de otros lenguajes y módulos del mismo entorno  */
-    "resolveJsonModule": true, /* me permite darle soporte a importar en mi código archivos json  */
-    "moduleResolution": "node", /* me permite darle soporte absoluto a typescript */
-    "target": "ES2020", /* me permite espicificar la estandarización del Ecmma Script para mi proyecto */
-    "noImplicitAny": true, /* me permite definir que no me recomiende tipar con tips any por default */
-    "sourceMap": true, /* me permite crear un archivo js raíz identificador para cada archivo generado a partir de ts  */
-    "experimentalDecorators": true, /* me permite darle soporte a mi proyecto para trabajar con decoradores  */
-    "emitDecoratorMetadata": true, /* me permite que la data que generen los decoradores persistan en tiempo de ejecución  */
-    "strict": true, /* me permite identificar algunas definiciones errores para tu código */
-    "baseUrl": "./", /* me permite definir donde alojaré mi directorio que tiene el directorio que tiene el código para producción */
+    "module": "CommonJS" /* me permite que cuando procese mi código de ts luego de compilación/transpilación se pase a JS */,
+    "esModuleInterop": true /* me permite tener compatibilidad con otras extensiones de otros lenguajes y módulos del mismo entorno  */,
+    "resolveJsonModule": true /* me permite darle soporte a importar en mi código archivos json  */,
+    "moduleResolution": "node" /* me permite darle soporte absoluto a typescript */,
+    "target": "ES2020" /* me permite espicificar la estandarización del Ecmma Script para mi proyecto */,
+    "noImplicitAny": true /* me permite definir que no me recomiende tipar con tips any por default */,
+    "sourceMap": true /* me permite crear un archivo js raíz identificador para cada archivo generado a partir de ts  */,
+    "experimentalDecorators": true /* me permite darle soporte a mi proyecto para trabajar con decoradores  */,
+    "emitDecoratorMetadata": true /* me permite que la data que generen los decoradores persistan en tiempo de ejecución  */,
+    "strict": true /* me permite identificar algunas definiciones errores para tu código */,
+    "baseUrl": "./" /* me permite definir donde alojaré mi directorio que tiene el directorio que tiene el código para producción */,
     "outDir": "./build" /* este es el directorio con mi código js para producción */
   },
-  "exclude": ["node_modules"], /* me permite ignorar el directorio de node_modules */
+  "exclude": ["node_modules"] /* me permite ignorar el directorio de node_modules */,
   "include": ["src/**/*.ts"] /* me permite definir donde se va encontrar mi código a compilar/transpilar */
 }
