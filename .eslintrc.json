@@ -2,8 +2,8 @@
   "root": true /* definir que trabaje en la carpeta root donde se encuentra el eslint */,
   "plugins": ["@typescript-eslint"] /* definimos que todos los plugins y parsers son heredaders de typescript-eslint */,
   "parser": "@typescript-eslint/parser" /* añadirle reglas específicas de ts al eslint */,
-  "extends": [
-    /* plugins de soporte para ts para eslint */ "eslint:recommended",
+  "extends": [ /* plugins de soporte para ts para eslint */
+    "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],

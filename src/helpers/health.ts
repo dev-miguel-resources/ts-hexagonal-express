@@ -14,3 +14,4 @@ class RouterHealth {
 }
 
 export default new RouterHealth().expressRouter
+
