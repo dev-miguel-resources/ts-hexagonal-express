@@ -8,12 +8,12 @@ class App {
   constructor() {
     this.expressApp = express()
     this.mountHealthCheck()
-    this.mountMiddlewares()
     this.mountErrors()
   }
 
+  // Principio Solid: Open/Close
   mountHealthCheck() {
-    this.expressApp.use('/user', routerHealth)
+    this.expressApp.use('/', routerHealth)
   }
 
   mountMiddlewares() {
