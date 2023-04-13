@@ -9,7 +9,7 @@
     "sourceMap": true /* me permite crear un archivo js raíz identificador para cada archivo generado a partir de ts  */,
     "experimentalDecorators": true /* me permite darle soporte a mi proyecto para trabajar con decoradores  */,
     "emitDecoratorMetadata": true /* me permite que la data que generen los decoradores persistan en tiempo de ejecución  */,
-    "strict": true /* me permite identificar algunas definiciones errores para tu código */,
+    "strict": false /* me permite identificar algunas definiciones de código estándar */,
     "baseUrl": "./" /* me permite definir donde alojaré mi directorio que tiene el directorio que tiene el código para producción */,
     "outDir": "./build" /* este es el directorio con mi código js para producción */
   },
