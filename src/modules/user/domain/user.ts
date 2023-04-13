@@ -2,22 +2,22 @@ import { IEntity } from '../../shared/entity.interface'
 
 // Principio SOLID: Interface Segregation
 interface UserRequired {
-	name: string
-	lastname: string
-	email: string
-	password: string
+  name: string
+  lastname: string
+  email: string
+  password: string
 }
 
 interface UserOptional {
-	refreshToken: string
-	active: boolean
-	guid: string
+  refreshToken: string
+  active: boolean
+  guid: string
 }
 
 interface UserUpdate {
-	name: string
-	lastname: string
-	password: string
+  name: string
+  lastname: string
+  password: string
 }
 
 export type UserProperties = Required<UserRequired> & Partial<UserOptional>
@@ -32,21 +32,27 @@ export default class User implements IEntity<UserProperties, UserUpdate> {
   private readonly guid: string
 
   constructor(userProperties: UserProperties) {
-	this.active = true
-	Object.assign(this, userProperties)
+    this.active = true
+    Object.assign(this, userProperties)
   }
 
   properties(): UserProperties {
-
+    return {
+      name: this.name,
+      lastname: this.lastname,
+      email: this.email,
+      password: this.password,
+      refreshToken: this.refreshToken,
+      active: this.active,
+      guid: this.guid,
+    }
   }
 
   update(fields: UserUpdate) {
-
+    Object.assign(this, fields)
   }
 
-  // soft-delete
   delete() {
-	this.active = false
+    this.active = false
   }
-
 }
