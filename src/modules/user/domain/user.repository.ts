@@ -2,9 +2,10 @@ import User from './user'
 
 // PRINCIPIO SOLID: INVERSION DEPENDENCY
 export interface UserRepository {
-  list(): User[]
-  listOne(guid: string): User
-  insert(user: User): User
-  update(user: User): User
-  delete(guid: string): User
+// design pattern Facade: https://refactoring.guru/es/design-patterns/facade
+  list(): Promise<User[]>
+  listOne(guid: string): Promise<User>
+  insert(user: User): Promise<User>
+  update(user: User): Promise<User>
+  delete(guid: string): Promise<User>
 }
