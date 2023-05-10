@@ -4,6 +4,7 @@ import { Bootstrap } from './base.bootstrap'
 let appDataSource: DataSource
 
 export default class extends Bootstrap {
+
   initialize(): Promise<DataSource> {
     const AppDataSource = new DataSource({
       type: 'mysql',
