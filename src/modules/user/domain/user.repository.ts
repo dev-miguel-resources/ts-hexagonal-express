@@ -9,6 +9,6 @@ export interface UserRepository {
   list(): Promise<User[]>
   listOne(guid: string): Promise<Result<User, UserNotFoundException>>
   update(guid: string, user: Partial<UserUpdate>): Promise<Result<User, UserNotFoundException>>
-  delete(guid: string): Promise<User>
+  delete(guid: string): Promise<Result<User, UserNotFoundException>>
 }
 

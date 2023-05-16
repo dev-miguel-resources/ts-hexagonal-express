@@ -7,7 +7,6 @@ import { UserEmailInvalidException, UserNotFoundException } from '../domain/exce
 import { Result, err, ok } from 'neverthrow'
 
 export default class UserInfraestructure implements UserRepository {
-
   async insert(user: User): Promise<User> {
     const userInsert = new UserEntity()
     const { guid, name, lastname, email, password, refreshToken, active } = user.properties()
@@ -21,7 +20,7 @@ export default class UserInfraestructure implements UserRepository {
       active,
     })
 
-   await DatabaseBootstrap.dataSource.getRepository(UserEntity).save(userInsert)
+    await DatabaseBootstrap.dataSource.getRepository(UserEntity).save(userInsert)
 
     return user
   }
@@ -78,17 +77,63 @@ export default class UserInfraestructure implements UserRepository {
   }
 
   async update(guid: string, user: Partial<UserUpdate>): Promise<Result<User, UserNotFoundException>> {
+    const repo = DatabaseBootstrap.dataSource.getRepository(UserEntity)
 
-	const repo = DatabaseBootstrap.dataSource.getRepository(UserEntity)
+    const userFound = await repo.findOne({
+      where: { guid },
+    })
 
-	const userFound = await repo.findOne({
-		where: { guid }
-	})
+    if (userFound) {
+      Object.assign(userFound, user)
+      const userEntity = await repo.save(userFound)
+      const emailResult = EmailVO.create(userEntity.email)
 
-	// pendiente por resolver luego de comerciales
+      if (emailResult.isErr()) {
+        return err(new UserEmailInvalidException())
+      }
 
+      return ok(
+        new User({
+          guid: userEntity.guid,
+          name: userEntity.name,
+          lastname: userEntity.lastname,
+          email: emailResult.value,
+          password: userEntity.password,
+          refreshToken: userEntity.refreshToken,
+          active: userEntity.active,
+        }),
+      )
+    }
   }
-  delete(guid: string): Promise<User> {
-    throw new Error('Method not implemented.')
+  async delete(guid: string): Promise<Result<User, UserNotFoundException>> {
+    const repo = DatabaseBootstrap.dataSource.getRepository(UserEntity)
+
+    const userFound = await repo.findOne({
+      where: { guid },
+    })
+
+    if (userFound) {
+      userFound.active = false
+      const userEntity = await repo.save(userFound)
+      const emailResult = EmailVO.create(userEntity.email)
+
+      if (emailResult.isErr()) {
+        return err(new UserEmailInvalidException())
+      }
+
+      return ok(
+        new User({
+          guid: userEntity.guid,
+          name: userEntity.name,
+          lastname: userEntity.lastname,
+          email: emailResult.value,
+          password: userEntity.password,
+          refreshToken: userEntity.refreshToken,
+          active: userEntity.active,
+        }),
+      )
+    } else {
+      return err(new UserNotFoundException())
+    }
   }
 }
