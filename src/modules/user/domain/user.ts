@@ -15,7 +15,7 @@ interface UserOptional {
   guid: string
 }
 
-interface UserUpdate {
+export interface UserUpdate {
   name: string
   lastname: string
   password: string
