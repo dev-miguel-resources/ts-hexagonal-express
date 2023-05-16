@@ -2,8 +2,9 @@ import User, { UserUpdate } from '../domain/user'
 import { UserRepository } from '../domain/user.repository'
 
 export default class UserApplication {
-  // SOLID PRINCIPLE: INVERSION DEPENDENCY
-  // DESIGN PATTERN INJECTION DEPENDENCY: https://desarrolloweb.com/articulos/patron-diseno-contenedor-dependencias.html
+
+  // Solid Principle: Inversion Dependency
+  // Design Pattern: Injection Dependency: https://desarrolloweb.com/articulos/patron-diseno-contenedor-dependencias.html
   constructor(private readonly userRepository: UserRepository) {}
 
   insert(user: User) {
