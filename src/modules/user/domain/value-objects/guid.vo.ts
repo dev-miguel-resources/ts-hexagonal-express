@@ -5,6 +5,7 @@ interface GuidProps {
   value: string
 }
 
+// refactorizarlo y ocuparlo
 export class GuidVO extends ValueObject<GuidProps> {
   private constructor(props: GuidProps) {
     super(props)

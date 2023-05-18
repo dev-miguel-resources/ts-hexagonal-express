@@ -4,7 +4,7 @@ import { UserRepository } from '../domain/user.repository'
 export default class UserApplication {
 
   // Solid Principle: Inversion Dependency
-  // Design Pattern: Injection Dependency: https://desarrolloweb.com/articulos/patron-diseno-contenedor-dependencias.html
+  // Design Pattern Injection Dependency: https://desarrolloweb.com/articulos/patron-diseno-contenedor-dependencias.html
   constructor(private readonly userRepository: UserRepository) {}
 
   insert(user: User) {
