@@ -1,5 +1,5 @@
 import { IEntity } from '../../shared/entity.interface'
-import { EmailVO } from './value-objects/email.vo';
+import { EmailVO } from './value-objects/email.vo'
 
 // Principio SOLID: Interface Segregation
 interface UserRequired {
