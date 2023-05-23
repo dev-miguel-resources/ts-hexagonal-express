@@ -7,6 +7,8 @@ import { UserInsertMapping } from './dto/user-insert.dto'
 import { UserListMapping } from './dto/user-list.dto'
 import { GuidVO } from '../../domain/value-objects/guid.vo'
 import { UserListOneMapping } from './dto/user-list-one.dto'
+import { UserUpdateMapping } from './dto/user-update.dto'
+import { UserDeleteMapping } from './dto/user-delete.dto'
 
 export default class {
   constructor(private application: UserApplication) {
@@ -58,33 +60,50 @@ export default class {
       return res.status(404).send(userResult.error.message)
     } else if (userResult.isOk()) {
       const result = new UserListOneMapping().execute(userResult.value.properties())
-      return res.json(result)
+      res.json(result)
     }
   }
 
   async update(req: Request, res: Response, next: NextFunction) {
-	const { guid } = req.params
-	const fieldsToUpdate = req.body
+    const { guid } = req.params
+    const fieldsToUpdate = req.body
 
-	const guidResult = GuidVO.create(guid)
-	if (guidResult.isErr()) {
-		const err: IError = new Error(guidResult.error.message)
-		err.status = 411
-		return next(err)
-	}
+    const guidResult = GuidVO.create(guid)
+    if (guidResult.isErr()) {
+      const err: IError = new Error(guidResult.error.message)
+      err.status = 411
+      return next(err)
+    }
 
-	const dataResult = await this.application.update(guid, fieldsToUpdate)
-	if (dataResult.isErr()) {
-		const err: IError = new Error(dataResult.error.message)
-		err.status = 411
-		return next(err)
-	} else {
-		//const result = new UserUpdateMapping().execute(dataResult.value.properties())
-      //return res.json(result)
-	}
+    const dataResult = await this.application.update(guid, fieldsToUpdate)
+    if (dataResult.isErr()) {
+      const err: IError = new Error(dataResult.error.message)
+      err.status = 404
+      return next(err)
+    } else {
+      const result = new UserUpdateMapping().execute(dataResult.value.properties())
+      res.json(result)
+    }
   }
 
-  async delete(req: Request, res: Response) {
-    //
+  async delete(req: Request, res: Response, next: NextFunction) {
+    const { guid } = req.params
+
+    const guidResult = GuidVO.create(guid)
+    if (guidResult.isErr()) {
+      const err: IError = new Error(guidResult.error.message)
+      err.status = 411
+      return next(err)
+    }
+
+    const dataResult = await this.application.delete(guid)
+    if (dataResult.isErr()) {
+      const err: IError = new Error(dataResult.error.message)
+      err.status = 404
+      return next(err)
+    } else {
+      const result = new UserDeleteMapping().execute(dataResult.value.properties())
+      res.json(result)
+    }
   }
 }
