@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
-import User, { UserProperties } from './user'
 import { UserPasswordService } from './services/user-password.service'
+import User from './user'
+import { UserProperties } from './user'
 import { EmailVO } from './value-objects/email.vo'
 import {
   UserLastnameRequiredException,
@@ -8,7 +9,7 @@ import {
   UserPasswordRequiredException,
   UserPasswordLengthInvalidException,
 } from './exceptions/user.exception'
-import { err, ok, Result } from 'neverthrow'
+import { Result, err, ok } from 'neverthrow'
 
 export type UserResult = Result<
   User,
@@ -18,7 +19,6 @@ export type UserResult = Result<
   | UserPasswordLengthInvalidException
 >
 
-// Design Pattern AbstractFactory: https://refactoring.guru/es/design-patterns/abstract-factory
 export default class UserFactory {
   async create(name: string, lastname: string, email: EmailVO, password: string): Promise<UserResult> {
     if (!name || name.trim() === '') {
@@ -37,7 +37,6 @@ export default class UserFactory {
       return err(new UserPasswordLengthInvalidException(password))
     }
 
-    // Design Pattern Method Factory: https://refactoring.guru/es/design-patterns/factory-method
     const passwordHash = await UserPasswordService.hash(password)
 
     const userProperties: UserProperties = {

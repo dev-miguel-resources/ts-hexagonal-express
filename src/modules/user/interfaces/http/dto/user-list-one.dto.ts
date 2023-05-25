@@ -15,7 +15,7 @@ export class UserListOneMapping extends DTO<UserProperties, UserListOneDTO> {
     return {
       name: data.name,
       lastname: data.lastname,
-      email: data.email.value,
+		email: data.email.value,
       guid: data.guid,
     }
   }
