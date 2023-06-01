@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 import { UserPasswordService } from './services/user-password.service'
 import User from './user'
-import { UserProperties } from './user'
+import { UserProperties } from './types/userProperties.type'
 import { EmailVO } from './value-objects/email.vo'
 import {
   UserLastnameRequiredException,

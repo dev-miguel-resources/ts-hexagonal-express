@@ -1,27 +1,7 @@
 import { IEntity } from '../../shared/entity.interface'
+import { UserUpdate } from './interfaces/userUpdate.interface'
+import { UserProperties } from './types/userProperties.type'
 import { EmailVO } from './value-objects/email.vo'
-
-// Principio SOLID: Interface Segregation
-interface UserRequired {
-  name: string
-  lastname: string
-  email: EmailVO
-  password: string
-}
-
-interface UserOptional {
-  refreshToken: string
-  active: boolean
-  guid: string
-}
-
-export interface UserUpdate {
-  name: string
-  lastname: string
-  password: string
-}
-
-export type UserProperties = Required<UserRequired> & Partial<UserOptional>
 
 export default class User implements IEntity<UserProperties, UserUpdate> {
   private name: string

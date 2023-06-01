@@ -12,7 +12,6 @@ import { IError } from '../helpers/ierror'
 
 export default class {
   constructor(private application: UserApplication) {
-    // Design Pattern Mediator: https://refactoring.guru/es/design-patterns/mediator
     this.insert = this.insert.bind(this)
     this.list = this.list.bind(this)
     this.listOne = this.listOne.bind(this)

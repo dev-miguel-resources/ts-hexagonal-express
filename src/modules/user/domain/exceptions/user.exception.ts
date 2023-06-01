@@ -1,4 +1,5 @@
-import { DomainException, DomainExceptionCode } from './domain.exception'
+import { DomainException } from './domain.exception'
+import { DomainExceptionCode } from '../enums/domainException.enum'
 
 export class UserNameRequiredException extends DomainException {
   constructor() {

@@ -1,5 +1,5 @@
 import User from '../domain/user'
-import { UserUpdate } from '../domain/user'
+import { UserUpdate } from '../domain/interfaces/userUpdate.interface'
 import { UserRepository } from '../domain/user.repository'
 import { EmailVO } from '../domain/value-objects/email.vo'
 import { UserEntity } from './user.entity'
