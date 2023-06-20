@@ -10,7 +10,7 @@
     "lint:fix": "eslint --fix .",
     "clean": "rimraf cache dist",
     "build": "yarn run clean && tsc && gulp minify",
-	 "prod": "node dist/index.js"
+    "prod": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
