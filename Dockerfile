@@ -1,4 +1,4 @@
-# Carpeta Deployment, node-api image, red: node-app-tarde
+# Carpeta Deployment, node-api image, red: node-app-net
 FROM node:alpine3.16 AS DEPLOYMENT
 
 # Esto es para instalar un bash para luego instalar desde un proceso remoto un optimizador de dependencias
