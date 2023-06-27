@@ -26,4 +26,4 @@ phases:
 
 artifacts:
   files:
-    - "Dockerrun.aws.json" # adjunte un archivo de configuración del beanstalk con el nombre obligatorio
+    - "Dockerrun.aws.json" # adjunte un archivo de configuración del beanstalk con el nombre obligatorios
