@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging into AWS ECR # mensaje de saludo
+      - aws --version # identificar la versión de aws para este proceso
+      - REPOSITORY_URI=101814004029.dkr.ecr.us-east-1.amazonaws.com/cursonodejstarde # la uri del repo de imágenes
+      - aws ecr get-login-password | docker login --username AWS --password-stdin ${REPOSITORY_URI} # quiero conectarme al ecr de aws, el usuario es fijo siempre AWS, el std recibe el password el comando anterior
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) # el codebuild resolve son variables propias del code pipeline y el cut es para resolver el commit en base a los primeros 7 caracteres del repositorio
+      - IMAGE_TAG=${COMMIT_HASH:=lastest} # cual es el tag de la versión
+  build:
+    commands:
+      - echo Build started on `date` # aquí ocupamos la función de fecha de code pipeline
+      - echo Building the docker image # mensaje de que se está construyendo la imagen de docker
+      #- aws s3 cp s3://bucketcursonodejs10/prd/.env .env
+      - docker build -t $REPOSITORY_URI:latest . # creo la imagen desde la raíz apuntando al repository de imágenes
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG # quiero crear una copia de la imagen con docker tag y la llamaré de otra manera
+
+  post_build:
+    commands:
+      - echo Build complete on `date` # para saber la fecha que el build fue completado
+      - echo Pushing the docker image # vamos a subir la imagen de docker
+      - docker push $REPOSITORY_URI:latest # ahora la subimos con docker push al repository de imágenes
+      - docker push $REPOSITORY_URI:$IMAGE_TAG # subo la copia igual. Gestionar 2 imágenes me permite poder hacer rollback a una versión anterior
+
+artifacts:
+  files:
+    - "Dockerrun.aws.json" # adjunte un archivo de configuración del beanstalk con el nombre obligatorio
