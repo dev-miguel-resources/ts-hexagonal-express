@@ -25,9 +25,9 @@ phases:
          - docker push $REPOSITORY_URI:latest # acá la subimos con docker push al repositorio de imágenes
          - docker push $REPOSITORY_URI:$IMAGE_TAG # subo también la copia como respaldo
 
-   artifacts:
-      files:
-         - "Dockerrun.aws.json" #adjuntamos el archivo con la especificación del proceso que genera un contenedor que envuelva la imagen del repositorio
+artifacts:
+   files:
+     - "Dockerrun.aws.json" #adjuntamos el archivo con la especificación del proceso que genera un contenedor que envuelva la imagen del repositorio
 
 
 
