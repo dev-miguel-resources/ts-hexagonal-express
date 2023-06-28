@@ -2,3 +2,4 @@ node_modules
 .gitignore
 cache
 dist
+buildspec.yaml

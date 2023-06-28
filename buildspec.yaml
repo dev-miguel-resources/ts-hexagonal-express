@@ -1,29 +1,35 @@
 version: 0.2
 
 phases:
-  pre_build:
-    commands:
-      - echo Logging into AWS ECR # mensaje de saludo
-      - aws --version # identificar la versión de aws para este proceso
-      - REPOSITORY_URI=101814004029.dkr.ecr.us-east-1.amazonaws.com/cursonodejstarde # la uri del repo de imágenes
-      - aws ecr get-login-password | docker login --username AWS --password-stdin ${REPOSITORY_URI} # quiero conectarme al ecr de aws, el usuario es fijo siempre AWS, el std recibe el password el comando anterior
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) # el codebuild resolve son variables propias del code pipeline y el cut es para resolver el commit en base a los primeros 7 caracteres del repositorio
-      - IMAGE_TAG=${COMMIT_HASH:=lastest} # cual es el tag de la versión
-  build:
-    commands:
-      - echo Build started on `date` # aquí ocupamos la función de fecha de code pipeline
-      - echo Building the docker image # mensaje de que se está construyendo la imagen de docker
-      #- aws s3 cp s3://bucketcursonodejs10/prd/.env .env
-      - docker build -t $REPOSITORY_URI:latest . # creo la imagen desde la raíz apuntando al repository de imágenes
-      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG # quiero crear una copia de la imagen con docker tag y la llamaré de otra manera
+   pre_build:
+      commands:
+      - echo Logging into AWS ECR # notificación de inicio de proceso
+      - aws --version # Identificar la versión de aws para este proceso de CI/CD
+      - REPOSITORY_URI=619467781629.dkr.ecr.us-east-2.amazonaws.com/cursotardenodejs # la url del repo de imágenes destinada para nuestra app
+      - aws ecr get-login-password | docker login --username AWS --password-stdin ${REPOSITORY_URI} # nos autenticamos de cara al ecr de aws mediante credenciales para poder ocupar el repositorio de la imagen
+      - COMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) # vamos a identificar los commit en el proceso de canalización mediante un largo del id proveniente del repository uri
+      - IMAGE_TAG=${COMIT_HASH:=lastest} # especificamos el tag de la versión
 
-  post_build:
-    commands:
-      - echo Build complete on `date` # para saber la fecha que el build fue completado
-      - echo Pushing the docker image # vamos a subir la imagen de docker
-      - docker push $REPOSITORY_URI:latest # ahora la subimos con docker push al repository de imágenes
-      - docker push $REPOSITORY_URI:$IMAGE_TAG # subo la copia igual. Gestionar 2 imágenes me permite poder hacer rollback a una versión anterior
+   build:
+      commands:
+      - echo Build started on `date` # ocupamos la función de fecha para saber cuando se disparo este proceso
+      - echo building the docker image # notificación de que se va a construir una imagen de docker
+      - # pendiente buenas prácticas para manejar las variables de entorno
+      - docker build -t $REPOSITORY_URI:latest . # creo la imagen desde la raíz del proyecto hacia el repository
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG # creo una imagen de respaldo con una copia de la imagen actual
 
-artifacts:
-  files:
-    - "Dockerrun.aws.json" # adjunte un archivo de configuración del beanstalk con el nombre obligatorios
+   post_build:
+      commands:
+         - echo Build complete on `date` # para saber la fecha en que el build fue completado
+         - echo Pushing the docker image # vamos a subir la imagen de docker al servidor de ec2 en el cualquier corre el elastic beanstalk
+         - docker push $REPOSITORY_URI:latest # acá la subimos con docker push al repositorio de imágenes
+         - docker push $REPOSITORY_URI:$IMAGE_TAG # subo también la copia como respaldo
+
+   artifacts:
+      files:
+         - "Dockerrun.aws.json" #adjuntamos el archivo con la especificación del proceso que genera un contenedor que envuelva la imagen del repositorio
+
+
+
+
+

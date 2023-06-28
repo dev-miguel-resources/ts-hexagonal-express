@@ -1,11 +1,11 @@
 {
-	"AWSEBDockerrunVersion": "1",
-	"Image": {
-	  "Name": "101814004029.dkr.ecr.us-east-1.amazonaws.com/cursonodejstarde:latest"
-	},
-	"Ports": [
-	  {
-		 "ContainerPort": "80"
-	  }
-	]
- }
+   "AWSEBDockerrunVersion": "1",
+   "Image": {
+      "Name": "619467781629.dkr.ecr.us-east-2.amazonaws.com/cursotardenodejs:latest"
+   },
+   "PORTS": [
+      {
+         "ContainerPort": "80"
+      }
+   ]
+}
