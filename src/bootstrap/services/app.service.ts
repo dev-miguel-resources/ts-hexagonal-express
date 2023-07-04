@@ -20,6 +20,7 @@ export class AppService {
          database: env.DB_NAME || 'bddcursonode',
          synchronize: env.DB_SYNC || false,
          logging: env.DB_LOGG || false,
+         connectionTimeout: +env.CONNECTION_TIMEOUT || 3000
       }
    }
 }

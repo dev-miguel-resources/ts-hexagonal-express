@@ -1,3 +1,4 @@
+// new property
 export interface DB_CONFIG {
   host: string
   port: number
@@ -7,4 +8,5 @@ export interface DB_CONFIG {
   database: string
   synchronize: boolean
   logging: boolean
+  connectionTimeout: number
 }
