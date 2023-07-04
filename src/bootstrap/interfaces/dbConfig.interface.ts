@@ -1,4 +1,4 @@
-// new property
+// new properties
 export interface DB_CONFIG {
   host: string
   port: number
