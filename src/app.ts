@@ -1,7 +1,7 @@
 import express, { Application } from 'express'
 import hpp from 'hpp'
 import helmet from 'helmet'
-import cors from 'cors'
+//import cors from 'cors'
 import compression from 'compression'
 import routerHealth from './helpers/health'
 import HandlerErrors from './helpers/errors'
@@ -22,13 +22,13 @@ class App {
   owaspSecurityMiddlewares() {
     this.expressApp.use(hpp())
     this.expressApp.use(helmet())
-    this.expressApp.use(
+    /*this.expressApp.use(
       cors({
         origin: '*',
         optionsSuccessStatus: 200,
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
       }),
-    )
+    )*/
   }
 
   mountHealthCheck() {
