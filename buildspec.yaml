@@ -7,6 +7,7 @@ phases:
       - echo Logging into AWS ECR # notificación de inicio de proceso
       - aws --version # Identificar la versión de aws para este proceso de CI/CD
       - REPOSITORY_URI=619467781629.dkr.ecr.us-east-2.amazonaws.com/cursotardenodejs # la url del repo de imágenes destinada para nuestra app
+      - TOKEN=$(aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken')
       - aws ecr get-login-password | docker login --username AWS --password-stdin ${REPOSITORY_URI} # nos autenticamos de cara al ecr de aws mediante credenciales para poder ocupar el repositorio de la imagen
       - COMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) # vamos a identificar los commit en el proceso de canalización mediante un largo del id proveniente del repository uri
       - IMAGE_TAG=${COMIT_HASH:=lastest} # especificamos el tag de la versión
