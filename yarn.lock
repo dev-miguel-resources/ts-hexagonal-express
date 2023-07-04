@@ -1671,6 +1671,11 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha512-RpAVKQA5T63xEj6/giIbUEtZwJ4UFIc3ZtvEkiaUERylqe8xb5IvqcgOurZLahv93CLKfxcw5YI+DZcUBRyLXA==
 
+coercer@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/coercer/-/coercer-1.1.2.tgz#eaea4459511f73f9f36ade04a98107ce75824b70"
+  integrity sha512-Hu19wnyO8jzg7khfk50U6w3TGcdl8AXPalTcC0mDfHIqsWl/+y7oKdnpEneXW27DIgQh1R79U8seiTeWiNQjsw==
+
 collect-v8-coverage@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/collect-v8-coverage/-/collect-v8-coverage-1.0.1.tgz#cc2c8e94fc18bbdffe64d6534570c8a673b27f59"
@@ -1882,6 +1887,11 @@ dedent@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/dedent/-/dedent-0.7.0.tgz#2495ddbaf6eb874abb0e1be9df22d2e5a544326c"
   integrity sha512-Q6fKUPqnAHAyhiUgFU7BUzLiv0kd8saH9al7tnu5Q/okj6dnupxyTgFIBjVzJATdfIAm9NAsvXNzjaKa+bxVyA==
+
+deep-extend@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
+  integrity sha512-LOHxIOaPYdHlJRtCQfDIVZtfw/ufM8+rVj649RIHzcm/vGwQRXFt6OPqIFWsm2XEMrNIEtWR64sY1LEKD2vAOA==
 
 deep-is@^0.1.3:
   version "0.1.4"
@@ -3759,6 +3769,11 @@ just-debounce@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/just-debounce/-/just-debounce-1.1.0.tgz#2f81a3ad4121a76bc7cb45dbf704c0d76a8e5ddf"
   integrity sha512-qpcRocdkUmf+UTNBYx5w6dexX5J31AKK1OmPwH630a83DdVVUIngk55RSAiIGpQyoH0dlr872VHfPjnQnK1qDQ==
+
+keyblade@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/keyblade/-/keyblade-0.3.2.tgz#1e657f47746596807d6b591c53476bea9a1ac2d4"
+  integrity sha512-XrmYoltF03F+aKM5ho4dOn/NQzuU3wA34dyVQobyHC+lD7jvNo0d3RMyus+rZtFGU7J/s+QYWXeONd2OZhKmtg==
 
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
@@ -5936,7 +5951,7 @@ yargs@^16.0.0:
     y18n "^5.0.5"
     yargs-parser "^20.2.2"
 
-yargs@^17.3.1, yargs@^17.6.2:
+yargs@^17.2.1, yargs@^17.3.1, yargs@^17.6.2:
   version "17.7.2"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.2.tgz#991df39aca675a192b816e1e0363f9d75d2aa269"
   integrity sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==
@@ -5967,6 +5982,17 @@ yargs@^7.1.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^5.0.1"
+
+yenv@3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/yenv/-/yenv-3.0.1.tgz#a28be833b42b506449e5f58c8556adbcfc04e257"
+  integrity sha512-vay8i6wJyNKDGMeB4RD2daBJ/bUNl35X23EJS8V3fNnSJNH5/7ZobyAbENMPf/vqt/w1tidpksYG+22/sI9hQQ==
+  dependencies:
+    coercer "^1.1.2"
+    deep-extend "^0.6.0"
+    js-yaml "^4.1.0"
+    keyblade "^0.3.2"
+    yargs "^17.2.1"
 
 yn@3.1.1:
   version "3.1.1"
