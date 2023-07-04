@@ -46,6 +46,9 @@ COPY --from=DEPLOYMENT /build/package.json ./package.json
 # Copiar el código generado para js a partir de la imagen anterior
 COPY --from=DEPLOYMENT /build/dist ./dist
 
+# Copiar las variables de entorno
+COPY --from=DEPLOYMENT /build/.env ./.env
+
 # Levantar la app desde la imagen
 CMD ["yarn", "run", "prod"]
 
