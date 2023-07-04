@@ -1,7 +1,7 @@
 {
    "AWSEBDockerrunVersion": "1",
    "Image": {
-      "Name": "public.ecr.aws/o4n1m8a0/node-cont-tarde:latest"
+      "Name": "619467781629.dkr.ecr.us-east-2.amazonaws.com/node-container-image-tarde:latest"
    },
    "PORTS": [
       {
