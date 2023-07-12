@@ -7,7 +7,6 @@ phases:
       - echo Logging into AWS ECR # notificación de inicio de proceso
       - aws --version # Identificar la versión de aws para este proceso de CI/CD
       - REPOSITORY_URI=619467781629.dkr.ecr.us-east-2.amazonaws.com/node-container-image-tarde # la url del repo de imágenes destinada para nuestra app
-      # - TOKEN=$(aws ecr get-authorization-token --output text --query 'authorizationData[].authorizationToken')
       - aws ecr get-login-password | docker login --username AWS --password-stdin ${REPOSITORY_URI} # nos autenticamos de cara al ecr de aws mediante credenciales para poder ocupar el repositorio de la imagen
       - COMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7) # vamos a identificar los commit en el proceso de canalización mediante un largo del id proveniente del repository uri
       - IMAGE_TAG=${COMIT_HASH:=lastest} # especificamos el tag de la versión
@@ -16,7 +15,6 @@ phases:
       commands:
       - echo Build started on `date` # ocupamos la función de fecha para saber cuando se disparo este proceso
       - echo building the docker image # notificación de que se va a construir una imagen de docker
-      - # pendiente buenas prácticas para manejar las variables de entorno del s3 production
       - aws s3 cp s3://mybucketnodetarde/prd-tarde/.env .env # el .env es el nombre del archivo que quiero darle
       - docker build -t $REPOSITORY_URI:latest . # creo la imagen desde la raíz del proyecto hacia el repository
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG # creo una imagen de respaldo con una copia de la imagen actual
